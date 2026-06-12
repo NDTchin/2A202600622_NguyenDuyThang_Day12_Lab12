@@ -2,7 +2,7 @@
 
 ## Public URL
 
-TODO: add Railway or Render URL after deployment.
+https://2a202600622nguyenduythangday12lab12-production.up.railway.app
 
 Local validation URL:
 
@@ -12,7 +12,7 @@ http://localhost:8080
 
 ## Platform
 
-Railway or Render.
+Railway.
 
 Local Docker Compose stack:
 
@@ -25,7 +25,7 @@ Nginx -> FastAPI agent -> Redis
 ### Health Check
 
 ```bash
-curl https://your-agent-url/health
+curl https://2a202600622nguyenduythangday12lab12-production.up.railway.app/health
 ```
 
 Expected response includes:
@@ -37,13 +37,13 @@ Expected response includes:
 ### Readiness Check
 
 ```bash
-curl https://your-agent-url/ready
+curl https://2a202600622nguyenduythangday12lab12-production.up.railway.app/ready
 ```
 
 ### API Test without Authentication
 
 ```bash
-curl -X POST https://your-agent-url/ask \
+curl -X POST https://2a202600622nguyenduythangday12lab12-production.up.railway.app/ask \
   -H "Content-Type: application/json" \
   -d '{"user_id":"test","question":"Hello"}'
 ```
@@ -53,7 +53,7 @@ Expected: `401 Unauthorized`.
 ### API Test with Authentication
 
 ```bash
-curl -X POST https://your-agent-url/ask \
+curl -X POST https://2a202600622nguyenduythangday12lab12-production.up.railway.app/ask \
   -H "X-API-Key: YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"user_id":"test","question":"Hello"}'
@@ -65,7 +65,7 @@ Expected: `200 OK`.
 
 ```bash
 for i in {1..15}; do
-  curl -X POST https://your-agent-url/ask \
+  curl -X POST https://2a202600622nguyenduythangday12lab12-production.up.railway.app/ask \
     -H "X-API-Key: YOUR_KEY" \
     -H "Content-Type: application/json" \
     -d "{\"user_id\":\"rate-test\",\"question\":\"test $i\"}"
@@ -88,9 +88,9 @@ Expected: later requests return `429`.
 
 ## Screenshots
 
-- `screenshots/dashboard.png` - TODO after deployment
-- `screenshots/running.png` - TODO after deployment
-- `screenshots/test.png` - TODO after deployment
+- `screenshots/dashboard.png` - Railway deployment dashboard
+- `screenshots/running.png` - service/domain running
+- `screenshots/test.png` - endpoint test results
 
 ## Local Validation Results
 
