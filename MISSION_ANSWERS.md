@@ -68,6 +68,7 @@ The final `docker-compose.yml` defines `nginx`, `agent`, and `redis` services wi
 - URL: TODO after deployment
 - Config: `06-lab-complete/railway.toml`
 - Required variables: `AGENT_API_KEY`, `JWT_SECRET`, `REDIS_URL`, `PORT`, `RATE_LIMIT_PER_MINUTE`, `MONTHLY_BUDGET_USD`
+- Application payload: Day 10 cleaned paper corpus and observability metrics are packaged in `06-lab-complete/day10_artifacts`.
 
 ### Exercise 3.2: Render deployment
 

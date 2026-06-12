@@ -15,9 +15,9 @@ from pydantic import BaseModel, Field
 from app.auth import verify_api_key
 from app.config import settings
 from app.cost_guard import CostGuard
+from app.day10_service import answer_from_corpus, corpus_summary, load_report, search_papers
 from app.rate_limiter import RateLimiter
 from app.storage import StateStore
-from utils.mock_llm import ask as llm_ask
 
 
 logging.basicConfig(
@@ -58,6 +58,7 @@ class AskResponse(BaseModel):
     history_count: int
     served_by: str
     timestamp: str
+    sources: list[dict] = Field(default_factory=list)
 
 
 @asynccontextmanager
@@ -135,6 +136,7 @@ def root():
             "health": "GET /health",
             "ready": "GET /ready",
             "metrics": "GET /metrics (requires X-API-Key)",
+            "day10": "GET /day10/summary, GET /day10/search?q=...",
         },
     }
 
@@ -152,7 +154,8 @@ async def ask_agent(
     store.append_history(body.user_id, "user", body.question)
 
     input_tokens = estimate_tokens(body.question)
-    answer = llm_ask(build_prompt(body.question, history))
+    corpus_result = answer_from_corpus(build_prompt(body.question, history))
+    answer = corpus_result["answer"]
     output_tokens = estimate_tokens(answer)
 
     store.append_history(body.user_id, "assistant", answer)
@@ -174,7 +177,23 @@ async def ask_agent(
         history_count=len(store.load_history(body.user_id)),
         served_by=INSTANCE_ID,
         timestamp=datetime.now(timezone.utc).isoformat(),
+        sources=corpus_result["matches"],
     )
+
+
+@app.get("/day10/summary", tags=["Day 10 Data Pipeline"])
+def day10_summary(_api_key: str = Depends(verify_api_key)):
+    return corpus_summary()
+
+
+@app.get("/day10/search", tags=["Day 10 Data Pipeline"])
+def day10_search(q: str, top_k: int = 3, _api_key: str = Depends(verify_api_key)):
+    return {"query": q, "results": search_papers(q, top_k=max(1, min(top_k, 10)))}
+
+
+@app.get("/day10/report/{name}", tags=["Day 10 Data Pipeline"])
+def day10_report(name: str, _api_key: str = Depends(verify_api_key)):
+    return load_report(name)
 
 
 @app.get("/health", tags=["Operations"])

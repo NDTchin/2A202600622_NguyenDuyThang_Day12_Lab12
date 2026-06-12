@@ -22,6 +22,7 @@ WORKDIR /app
 COPY --from=builder /install /usr/local
 COPY app/ ./app/
 COPY utils/ ./utils/
+COPY day10_artifacts/ ./day10_artifacts/
 
 RUN chown -R agent:agent /app
 

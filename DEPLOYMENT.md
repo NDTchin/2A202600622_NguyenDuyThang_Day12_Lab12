@@ -103,3 +103,4 @@ Validated locally on June 12, 2026:
 - Rate limit test: `ok=10 limited=2 other=0`
 - Redis persistence test: `history_count` remained available after restarting the agent container
 - Scaling test: `docker compose up -d --scale agent=3` produced three healthy agent containers behind Nginx
+- Day 10 artifact test: `/day10/summary` returns corpus metrics and quality status

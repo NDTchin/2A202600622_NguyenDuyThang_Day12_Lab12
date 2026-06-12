@@ -1,0 +1,104 @@
+{
+  "report_name": "baseline_quality",
+  "total_rows": 24,
+  "total_columns": 16,
+  "non_null_counts": {
+    "paper_id": 24,
+    "title": 24,
+    "summary": 24,
+    "authors": 24,
+    "categories": 24,
+    "primary_category": 24,
+    "published": 24,
+    "updated": 24,
+    "age_days": 24,
+    "authors_joined": 24,
+    "categories_joined": 24,
+    "summary_chars": 24,
+    "text_for_embedding": 24,
+    "abs_url": 24,
+    "pdf_url": 24,
+    "comment": 24
+  },
+  "passed": true,
+  "failed_checks": 0,
+  "checks": [
+    {
+      "name": "row_count_minimum",
+      "passed": true,
+      "observed": 24,
+      "threshold": ">= 3",
+      "severity": "error"
+    },
+    {
+      "name": "required_columns_present",
+      "passed": true,
+      "observed": [],
+      "threshold": "no missing columns",
+      "severity": "error"
+    },
+    {
+      "name": "paper_id_not_blank",
+      "passed": true,
+      "observed": 0,
+      "threshold": "0 blank values",
+      "severity": "error"
+    },
+    {
+      "name": "paper_id_unique",
+      "passed": true,
+      "observed": 0,
+      "threshold": "0 duplicates",
+      "severity": "error"
+    },
+    {
+      "name": "title_not_blank",
+      "passed": true,
+      "observed": 0,
+      "threshold": "0 blank values",
+      "severity": "error"
+    },
+    {
+      "name": "summary_not_blank",
+      "passed": true,
+      "observed": 0,
+      "threshold": "0 blank values",
+      "severity": "error"
+    },
+    {
+      "name": "summary_min_length",
+      "passed": true,
+      "observed": 0,
+      "threshold": "0 below 40 chars",
+      "severity": "error"
+    },
+    {
+      "name": "embedding_text_not_blank",
+      "passed": true,
+      "observed": 0,
+      "threshold": "0 blank values",
+      "severity": "error"
+    },
+    {
+      "name": "published_parseable",
+      "passed": true,
+      "observed": 0,
+      "threshold": "0 invalid dates",
+      "severity": "error"
+    },
+    {
+      "name": "age_days_parseable",
+      "passed": true,
+      "observed": 0,
+      "threshold": "0 invalid values",
+      "severity": "error"
+    },
+    {
+      "name": "freshness_threshold",
+      "passed": true,
+      "observed": 0,
+      "threshold": "0 rows older than 180 days",
+      "severity": "warning"
+    }
+  ]
+}

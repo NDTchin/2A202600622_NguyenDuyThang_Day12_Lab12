@@ -63,6 +63,25 @@ curl -X POST http://localhost:8080/ask \
   -d '{"user_id":"test","question":"What is deployment?"}'
 ```
 
+The `/ask` endpoint answers from the Day 10 cleaned scholarly-paper corpus and
+returns matched source papers in the `sources` field.
+
+Inspect the deployed Day 10 artifacts:
+
+```powershell
+Invoke-RestMethod `
+  -Uri "http://localhost:8080/day10/summary" `
+  -Headers @{ "X-API-Key" = "local-dev-key" }
+
+Invoke-RestMethod `
+  -Uri "http://localhost:8080/day10/search?q=deep%20learning" `
+  -Headers @{ "X-API-Key" = "local-dev-key" }
+
+Invoke-RestMethod `
+  -Uri "http://localhost:8080/day10/report/phase1" `
+  -Headers @{ "X-API-Key" = "local-dev-key" }
+```
+
 Run the local self-test script from the repository root:
 
 ```powershell
